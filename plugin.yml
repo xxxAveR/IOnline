@@ -1,0 +1,16 @@
+name: IOnline
+version: 1.0.0
+
+main: ru.xAveR.IOnline.IOnlineMain
+commands:
+  ibusy:
+      description: Mode not bother
+  iinvisible:
+      description: Mode invisible
+permissions:
+    ionline.use:
+        default: true
+    ionline.ibusy:
+        default: true
+    ionline.iinvisible:
+        default: true
