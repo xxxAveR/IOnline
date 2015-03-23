@@ -29,10 +29,13 @@ public class IOnlineMain extends JavaPlugin implements Listener {
     private Team offline ;
     private Objective IOnline;
     
+    
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onEnable(){
 		getServer().getPluginManager().registerEvents(this, this);
+		
+
 		sbM = Bukkit.getScoreboardManager();
 		s =  sbM.getNewScoreboard();
 		online = s.registerNewTeam("online");
@@ -40,12 +43,14 @@ public class IOnlineMain extends JavaPlugin implements Listener {
 		offline = s.registerNewTeam("offline");
 		IOnline = s.registerNewObjective("IOnline", "dummy");
 		
-		online.setSuffix(ChatColor.GREEN + " [Онлайн]");
-		notBother.setSuffix(ChatColor.GOLD + " [Занят]");
-		offline.setSuffix(ChatColor.RED + " [Оффлайн]");
-		IOnline.setDisplayName("Администрация");
+		online.setSuffix(ChatColor.GREEN +  " [" + this.getConfig().getString("Online Prefix") + "]");
+		notBother.setSuffix(ChatColor.GOLD + " [" + this.getConfig().getString("Not Bother Prefix") + "]");
+		offline.setSuffix(ChatColor.RED + " [" + this.getConfig().getString("Offline Prefix") + "]");
+		IOnline.setDisplayName(this.getConfig().getString("Scoreboard Name"));
 		IOnline.setDisplaySlot(DisplaySlot.SIDEBAR);
-				
+		
+		saveDefaultConfig();
+		
 		for(Player p : Bukkit.getOnlinePlayers()){
 			if(p.hasPermission("ionline.use")){
 				Score s = IOnline.getScore(p);
@@ -130,12 +135,10 @@ public class IOnlineMain extends JavaPlugin implements Listener {
             			online.removePlayer(p);
             			offline.addPlayer(p);
             			scoreUpdate();
-            			p.setPlayerListName("");
             		} else {
             			offline.removePlayer(p);
             			online.addPlayer(p);
             			scoreUpdate();
-            			p.setPlayerListName(p.getName());
             		}
             	}
             }
@@ -143,4 +146,5 @@ public class IOnlineMain extends JavaPlugin implements Listener {
 		return false;
     }
 }
-
+    
+   

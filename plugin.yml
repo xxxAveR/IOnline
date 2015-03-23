@@ -1,6 +1,5 @@
 name: IOnline
-version: 1.0.0
-
+version: 1.1
 main: ru.xAveR.IOnline.IOnlineMain
 commands:
   ibusy:
